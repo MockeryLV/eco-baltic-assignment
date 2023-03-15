@@ -2,5 +2,5 @@
 
 ## Prerequesites
 
-* MySql/MariaDB database named 'eco-baltic'
-* MySql/MariaDB server should have a user with a name 'eco-baltia' and password 'pass'
+* MySql/MariaDB server with an empty database
+* Change .env DB section data according to your database
