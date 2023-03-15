@@ -26,3 +26,9 @@ Route::get('/books', function () {
 Route::get('/authors', function () {
     return Author::all();
 });
+
+Route::get('/books/{book}', function ($id) {
+    return view('book', [
+        'book' => Book::find($id)
+    ]);
+});
