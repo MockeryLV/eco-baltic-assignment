@@ -2,6 +2,15 @@
 <x-search />
 <div>
     <hr />
+    <div class="mt-5 ml-4 mr-10 text-lg uppercase tracking-wider text-center">
+        <span>Sort by monthly sales: </span>
+        <a href="/?order=desc">
+            ↓
+        </a>
+        <a href="/?order=asc">
+            ↑
+        </a>
+    </div>
     <section class="py-10 bg-gray-100">
         @unless(count($books) < 1)
             <div class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

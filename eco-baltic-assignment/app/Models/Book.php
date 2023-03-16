@@ -31,4 +31,8 @@ class Book extends Model
     public function sales() {
         return $this->hasMany(Sale::class);
     }
+
+    public function salesCurrentMonth() {
+        return $this->sales()->whereMonth('created_at', Carbon::now()->month);
+    }
 }
