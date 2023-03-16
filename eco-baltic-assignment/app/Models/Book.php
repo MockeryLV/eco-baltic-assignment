@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,18 +10,22 @@ class Book extends Model
 {
     use HasFactory;
 
-    public static function find($id) {
-        $books = self::all();
-
-        foreach ($books as $book) {
-            if($book['id'] == $id) {
-                return $book;
-            }
-        }
-    }
-
     public function authors() {
         return $this->belongsToMany(Author::class);
+    }
+
+    public function scopeFilter($query, array $filters) {
+        if($filters['genre'] ?? false) {
+            $query->where('genre', 'like', request('genre'));
+        }
+
+        if($filters['search'] ?? false) {
+            $query->whereHas('authors', function ($query) {
+                $query->where('name', 'like', '%' . request('search') . '%');
+            })
+                ->orWhere('title', 'like', '%' . request('search') . '%')
+                ->orWhere('genre', 'like', '%' . request('search') . '%');
+        }
     }
 
     public function sales() {

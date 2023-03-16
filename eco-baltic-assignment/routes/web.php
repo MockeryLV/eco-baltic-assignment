@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\SaleController;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
@@ -15,20 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BookController::class, 'index']);
 
-Route::get('/books', function () {
-    return Book::all();
-});
+Route::post('/sales', [SaleController::class, 'store']);
 
-Route::get('/authors', function () {
-    return Author::all();
-});
-
-Route::get('/books/{book}', function ($id) {
-    return view('book', [
-        'book' => Book::find($id)
-    ]);
-});
+Route::get('/books/{book}', [BookController::class, 'show']);

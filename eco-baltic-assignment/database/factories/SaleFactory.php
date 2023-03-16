@@ -14,7 +14,7 @@ class SaleFactory extends Factory
     public function definition()
     {
         return [
-            'book_id' => rand(1, 10)
+            'book_id' => rand(1, 32)
         ];
     }
 }

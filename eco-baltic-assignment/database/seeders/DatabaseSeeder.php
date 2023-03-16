@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Sale;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        Book::factory(10)->create();
+        Book::factory(32)->create();
         Author::factory(10)->create();
-        Sale::factory(50)->create();
+
+        // Fake data for this month
+        Sale::factory(200)->create([
+            'created_at' => Carbon::now()->startOfMonth()
+        ])->each(function ($sale) {
+            $sale->created_at = $sale->created_at->addMinutes(rand(1,1440 * 30));
+        });
+
+        // Fake data for previous month
+        Sale::factory(200)->create([
+            'created_at' => Carbon::now()->subMonth()->startOfMonth()
+        ])->each(function ($sale) {
+            $sale->created_at = $sale->created_at->addMinutes(rand(1,1440 * 30));
+        });
     }
 }
