@@ -21,17 +21,18 @@
             <p>{{$book->description}}</p>
         </div>
         <div class="mt-1 p-2">
-            <h2 class="text-slate-700">{{$book->title}}</h2>
-            <p class="mt-1 text-sm text-slate-400">
-                @if(count($book->authors) < 1)
-                    Unknown author
-                @endif
+            <div style="min-height: 100px">
+                <h2 class="text-slate-700">{{$book->title}}</h2>
+                <p class="mt-1 text-sm text-slate-400">
+                    @if(count($book->authors) < 1)
+                        Unknown author
+                    @endif
 
-                @foreach($book->authors as $author)
-                    {{$author->name.', '}}
-                @endforeach
-            </p>
-
+                    @foreach($book->authors as $author)
+                        {{$author->name.', '}}
+                    @endforeach
+                </p>
+            </div>
             <div class="mt-3 flex items-end justify-between">
                 <a href="/?genre={{$book->genre}}" class="text-lg font-bold text-blue-500">{{$book->genre}}</a>
                 <form action="/sales" method="POST">
